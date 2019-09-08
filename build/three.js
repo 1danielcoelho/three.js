@@ -17890,14 +17890,23 @@
 
 		}
 
-		var vertexGlsl = prefixVertex + vertexShader;
-		var fragmentGlsl = prefixFragment + fragmentShader;
+		// var vertexGlsl = prefixVertex + vertexShader;
+		// var fragmentGlsl = prefixFragment + fragmentShader;
+
+		var _fs = fragmentShader;
+		var _vs = vertexShader;
+
+		if (!window.THREE_SHADER_OVERRIDE) 
+		{
+			_fs = prefixFragment + _fs;
+			_vs = prefixVertex + _vs;
+		}
 
 		// console.log( '*VERTEX*', vertexGlsl );
 		// console.log( '*FRAGMENT*', fragmentGlsl );
 
-		var glVertexShader = WebGLShader( gl, 35633, vertexGlsl );
-		var glFragmentShader = WebGLShader( gl, 35632, fragmentGlsl );
+		var glVertexShader = WebGLShader(gl, 35633, _vs);
+		var glFragmentShader = WebGLShader(gl, 35632, _fs);
 
 		gl.attachShader( program, glVertexShader );
 		gl.attachShader( program, glFragmentShader );
