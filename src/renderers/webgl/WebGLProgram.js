@@ -631,14 +631,23 @@ function WebGLProgram( renderer, extensions, code, material, shader, parameters,
 
 	}
 
-	var vertexGlsl = prefixVertex + vertexShader;
-	var fragmentGlsl = prefixFragment + fragmentShader;
+	// var vertexGlsl = prefixVertex + vertexShader;
+	// var fragmentGlsl = prefixFragment + fragmentShader;
+
+	var _fs = fragmentShader;
+	var _vs = vertexShader;
+
+	if (!window.THREE_SHADER_OVERRIDE) 
+	{
+		_fs = prefixFragment + _fs;
+		_vs = prefixVertex + _vs;
+	}
 
 	// console.log( '*VERTEX*', vertexGlsl );
 	// console.log( '*FRAGMENT*', fragmentGlsl );
 
-	var glVertexShader = WebGLShader( gl, gl.VERTEX_SHADER, vertexGlsl );
-	var glFragmentShader = WebGLShader( gl, gl.FRAGMENT_SHADER, fragmentGlsl );
+	var glVertexShader = WebGLShader(gl, gl.VERTEX_SHADER, _vs);
+	var glFragmentShader = WebGLShader(gl, gl.FRAGMENT_SHADER, _fs);
 
 	gl.attachShader( program, glVertexShader );
 	gl.attachShader( program, glFragmentShader );
