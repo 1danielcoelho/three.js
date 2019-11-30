@@ -1,10 +1,10 @@
 export default /* glsl */`
 #ifdef FLAT_SHADED
 
-	// Workaround for Adreno/Nexus5 not able able to do dFdx( vViewPosition ) ...
+	// Workaround for Adreno/Nexus5 not able able to do dFdx( vWorldPosition ) ...
 
-	vec3 fdx = vec3( dFdx( vViewPosition.x ), dFdx( vViewPosition.y ), dFdx( vViewPosition.z ) );
-	vec3 fdy = vec3( dFdy( vViewPosition.x ), dFdy( vViewPosition.y ), dFdy( vViewPosition.z ) );
+	vec3 fdx = vec3( dFdx( vWorldPosition.x ), dFdx( vWorldPosition.y ), dFdx( vWorldPosition.z ) );
+	vec3 fdy = vec3( dFdy( vWorldPosition.x ), dFdy( vWorldPosition.y ), dFdy( vWorldPosition.z ) );
 	vec3 normal = normalize( cross( fdx, fdy ) );
 
 #else

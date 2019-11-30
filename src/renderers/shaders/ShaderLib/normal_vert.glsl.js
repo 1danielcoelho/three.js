@@ -3,7 +3,7 @@ export default /* glsl */`
 
 #if defined( FLAT_SHADED ) || defined( USE_BUMPMAP ) || defined( TANGENTSPACE_NORMALMAP )
 
-	varying vec3 vViewPosition;
+	varying vec3 vWorldPosition;
 
 #endif
 
@@ -60,7 +60,8 @@ void main() {
 
 #if defined( FLAT_SHADED ) || defined( USE_BUMPMAP ) || defined( TANGENTSPACE_NORMALMAP )
 
-	vViewPosition = - mvPosition.xyz;
+	vec4 worldPosition = modelMatrix * vec4( transformed, 1.0 );
+	vWorldPosition = worldPosition.xyz;
 
 #endif
 

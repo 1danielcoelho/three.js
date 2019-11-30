@@ -206,7 +206,6 @@ function WebGLLights() {
 				uniforms.direction.setFromMatrixPosition( light.matrixWorld );
 				vector3.setFromMatrixPosition( light.target.matrixWorld );
 				uniforms.direction.sub( vector3 );
-				uniforms.direction.transformDirection( viewMatrix );
 
 				uniforms.shadow = light.castShadow;
 
@@ -234,7 +233,6 @@ function WebGLLights() {
 				var uniforms = cache.get( light );
 
 				uniforms.position.setFromMatrixPosition( light.matrixWorld );
-				uniforms.position.applyMatrix4( viewMatrix );
 
 				uniforms.color.copy( color ).multiplyScalar( intensity );
 				uniforms.distance = distance;
@@ -242,7 +240,6 @@ function WebGLLights() {
 				uniforms.direction.setFromMatrixPosition( light.matrixWorld );
 				vector3.setFromMatrixPosition( light.target.matrixWorld );
 				uniforms.direction.sub( vector3 );
-				uniforms.direction.transformDirection( viewMatrix );
 
 				uniforms.coneCos = Math.cos( light.angle );
 				uniforms.penumbraCos = Math.cos( light.angle * ( 1 - light.penumbra ) );
@@ -280,12 +277,10 @@ function WebGLLights() {
 				uniforms.color.copy( color ).multiplyScalar( intensity );
 
 				uniforms.position.setFromMatrixPosition( light.matrixWorld );
-				uniforms.position.applyMatrix4( viewMatrix );
 
 				// extract local rotation of light to derive width/height half vectors
 				matrix42.identity();
 				matrix4.copy( light.matrixWorld );
-				matrix4.premultiply( viewMatrix );
 				matrix42.extractRotation( matrix4 );
 
 				uniforms.halfWidth.set( light.width * 0.5, 0.0, 0.0 );
@@ -306,7 +301,6 @@ function WebGLLights() {
 				var uniforms = cache.get( light );
 
 				uniforms.position.setFromMatrixPosition( light.matrixWorld );
-				uniforms.position.applyMatrix4( viewMatrix );
 
 				uniforms.color.copy( light.color ).multiplyScalar( light.intensity );
 				uniforms.distance = light.distance;

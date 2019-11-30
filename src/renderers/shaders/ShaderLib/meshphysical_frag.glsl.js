@@ -30,7 +30,7 @@ uniform float opacity;
 	uniform vec3 sheen;
 #endif
 
-varying vec3 vViewPosition;
+varying vec3 vWorldPosition;
 
 #ifndef FLAT_SHADED
 

@@ -9,7 +9,7 @@ export default /* glsl */`
 
 		vec3 cameraToVertex = normalize( worldPosition.xyz - cameraPosition );
 
-		vec3 worldNormal = inverseTransformDirection( transformedNormal, viewMatrix );
+		vec3 worldNormal = transformedNormal;
 
 		#ifdef ENVMAP_MODE_REFLECTION
 

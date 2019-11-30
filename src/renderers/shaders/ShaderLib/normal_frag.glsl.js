@@ -5,7 +5,7 @@ uniform float opacity;
 
 #if defined( FLAT_SHADED ) || defined( USE_BUMPMAP ) || defined( TANGENTSPACE_NORMALMAP )
 
-	varying vec3 vViewPosition;
+	varying vec3 vWorldPosition;
 
 #endif
 

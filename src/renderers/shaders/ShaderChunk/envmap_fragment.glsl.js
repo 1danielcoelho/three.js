@@ -5,8 +5,7 @@ export default /* glsl */`
 
 		vec3 cameraToVertex = normalize( vWorldPosition - cameraPosition );
 
-		// Transforming Normal Vectors with the Inverse Transformation
-		vec3 worldNormal = inverseTransformDirection( normal, viewMatrix );
+		vec3 worldNormal = normal;
 
 		#ifdef ENVMAP_MODE_REFLECTION
 

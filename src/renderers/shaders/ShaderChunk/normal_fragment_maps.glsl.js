@@ -29,13 +29,13 @@ export default /* glsl */`
 
 	#else
 
-		normal = perturbNormal2Arb( -vViewPosition, normal, normalScale, normalMap );
+		normal = perturbNormal2Arb( vWorldPosition, normal, normalScale, normalMap );
 
 	#endif
 
 #elif defined( USE_BUMPMAP )
 
-	normal = perturbNormalArb( -vViewPosition, normal, dHdxy_fwd() );
+	normal = perturbNormalArb( vWorldPosition, normal, dHdxy_fwd() );
 
 #endif
 `;

@@ -10,7 +10,7 @@ export default /* glsl */`
 
 	#else
 
-		clearcoatNormal = perturbNormal2Arb( - vViewPosition, clearcoatNormal, clearcoatNormalScale, clearcoatNormalMap );
+		clearcoatNormal = perturbNormal2Arb( - vWorldPosition, clearcoatNormal, clearcoatNormalScale, clearcoatNormalMap );
 
 	#endif
 
