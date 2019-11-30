@@ -16,9 +16,9 @@ export default /* glsl */`
 
 GeometricContext geometry;
 
-geometry.position = vWorldPosition;
+geometry.position = - vViewPosition;
 geometry.normal = normal;
-geometry.viewDir = normalize( vWorldPosition );
+geometry.viewDir = ( isOrthographic ) ? vec3( 0, 0, 1 ) : normalize( vViewPosition );
 
 #ifdef CLEARCOAT
 

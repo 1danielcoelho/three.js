@@ -7,7 +7,7 @@ export default /* glsl */`
 
 	vec3 getLightProbeIndirectIrradiance( /*const in SpecularLightProbe specularLightProbe,*/ const in GeometricContext geometry, const in int maxMIPLevel ) {
 
-		vec3 worldNormal = geometry.normal;
+		vec3 worldNormal = inverseTransformDirection( geometry.normal, viewMatrix );
 
 		#ifdef ENVMAP_TYPE_CUBE
 
@@ -71,6 +71,8 @@ export default /* glsl */`
 		  vec3 reflectVec = refract( -viewDir, normal, refractionRatio );
 
 		#endif
+
+		reflectVec = inverseTransformDirection( reflectVec, viewMatrix );
 
 		float specularMIPLevel = getSpecularMIPLevel( roughness, maxMIPLevel );
 

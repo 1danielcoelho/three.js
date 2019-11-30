@@ -1,10 +1,10 @@
 export default /* glsl */`
 #ifdef FLAT_SHADED
 
-	// Workaround for Adreno/Nexus5 not able able to do dFdx( vWorldPosition ) ...
+	// Workaround for Adreno/Nexus5 not able able to do dFdx( vViewPosition ) ...
 
-	vec3 fdx = vec3( dFdx( vWorldPosition.x ), dFdx( vWorldPosition.y ), dFdx( vWorldPosition.z ) );
-	vec3 fdy = vec3( dFdy( vWorldPosition.x ), dFdy( vWorldPosition.y ), dFdy( vWorldPosition.z ) );
+	vec3 fdx = vec3( dFdx( vViewPosition.x ), dFdx( vViewPosition.y ), dFdx( vViewPosition.z ) );
+	vec3 fdy = vec3( dFdy( vViewPosition.x ), dFdy( vViewPosition.y ), dFdy( vViewPosition.z ) );
 	vec3 normal = normalize( cross( fdx, fdy ) );
 
 #else
@@ -26,6 +26,12 @@ export default /* glsl */`
 
 			tangent = tangent * ( float( gl_FrontFacing ) * 2.0 - 1.0 );
 			bitangent = bitangent * ( float( gl_FrontFacing ) * 2.0 - 1.0 );
+
+		#endif
+
+		#if defined( TANGENTSPACE_NORMALMAP ) || defined( USE_CLEARCOAT_NORMALMAP )
+
+			mat3 vTBN = mat3( tangent, bitangent, normal );
 
 		#endif
 

@@ -20,22 +20,22 @@ export default /* glsl */`
 
 #elif defined( TANGENTSPACE_NORMALMAP )
 
+	vec3 mapN = texture2D( normalMap, vUv ).xyz * 2.0 - 1.0;
+	mapN.xy *= normalScale;
+
 	#ifdef USE_TANGENT
 
-		mat3 vTBN = mat3( tangent, bitangent, normal );
-		vec3 mapN = texture2D( normalMap, vUv ).xyz * 2.0 - 1.0;
-		mapN.xy = normalScale * mapN.xy;
 		normal = normalize( vTBN * mapN );
 
 	#else
 
-		normal = perturbNormal2Arb( vWorldPosition, normal, normalScale, normalMap );
+		normal = perturbNormal2Arb( -vViewPosition, normal, mapN );
 
 	#endif
 
 #elif defined( USE_BUMPMAP )
 
-	normal = perturbNormalArb( vWorldPosition, normal, dHdxy_fwd() );
+	normal = perturbNormalArb( -vViewPosition, normal, dHdxy_fwd() );
 
 #endif
 `;
