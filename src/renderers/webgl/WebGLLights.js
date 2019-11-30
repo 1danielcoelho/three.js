@@ -170,8 +170,6 @@ function WebGLLights() {
 		var numPointShadows = 0;
 		var numSpotShadows = 0;
 
-		var viewMatrix = camera.matrixWorldInverse;
-
 		lights.sort( shadowCastingLightsFirst );
 
 		for ( var i = 0, l = lights.length; i < l; i ++ ) {
@@ -334,7 +332,6 @@ function WebGLLights() {
 				var uniforms = cache.get( light );
 
 				uniforms.direction.setFromMatrixPosition( light.matrixWorld );
-				uniforms.direction.transformDirection( viewMatrix );
 				uniforms.direction.normalize();
 
 				uniforms.skyColor.copy( light.color ).multiplyScalar( intensity );
